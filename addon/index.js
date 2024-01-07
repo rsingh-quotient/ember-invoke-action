@@ -3,7 +3,6 @@ import { assert } from '@ember/debug';
 import { get } from '@ember/object';
 
 const makeInvokeAction = ({ strict = false } = {}) => {
-  debugger
   return (object, actionName, ...args) => {
     assert('The first argument passed to invokeAction must be an object',
            typeof object === 'object');

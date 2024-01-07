@@ -5,6 +5,13 @@
 
 A slightly more idiomatic way to invoke actions in your Ember components.
 
+## Compatibility
+
+* Ember.js v4.4 or above
+* Ember CLI v4.4 or above
+* Node.js v14 or above
+
+
 ## Installation
 
 ```
@@ -14,6 +21,7 @@ ember install ember-invoke-action
 ## How To
 
 You can either use `ember-invoke-action` as a helper function or a mixin.
+## Usage
 
 ### Mixin usage
 
@@ -92,5 +100,11 @@ This code was inspired by @miguelcobain, I just made an addon out of it.
 
 License
 ------------------------------------------------------------------------------
+## Contributing
+
+See the [Contributing](CONTRIBUTING.md) guide for details.
+
+
+## License
 
 This project is licensed under the [MIT License](LICENSE.md).

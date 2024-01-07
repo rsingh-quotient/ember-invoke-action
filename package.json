@@ -66,44 +66,67 @@
     "url": "https://github.com/martndemus/ember-invoke-action/issues"
   },
   "dependencies": {
-    "ember-cli-babel": "^6.6.0"
+    "ember-cli-babel": "^7.26.11",
+    "ember-cli-htmlbars": "^6.2.0"
   },
   "description": "A slightly more idiomatic way to invoke actions in your Ember components",
   "devDependencies": {
-    "broccoli-asset-rev": "^2.4.5",
-    "ember-cli": "~3.1.4",
-    "ember-cli-dependency-checker": "^2.0.0",
-    "ember-cli-eslint": "^4.2.1",
-    "ember-cli-htmlbars": "^2.0.1",
-    "ember-cli-htmlbars-inline-precompile": "^1.0.0",
-    "ember-cli-inject-live-reload": "^1.4.1",
-    "ember-cli-qunit": "^4.1.1",
-    "ember-cli-shims": "^1.2.0",
-    "ember-cli-sri": "^2.1.0",
-    "ember-cli-uglify": "^2.0.0",
+    "@babel/eslint-parser": "^7.21.3",
+    "@babel/plugin-proposal-decorators": "^7.21.0",
+    "@ember/optional-features": "^2.0.0",
+    "@ember/string": "^3.0.1",
+    "@ember/test-helpers": "^2.9.3",
+    "@embroider/test-setup": "^2.1.1",
+    "@glimmer/component": "^1.1.2",
+    "@glimmer/tracking": "^1.1.2",
+    "broccoli-asset-rev": "^3.0.0",
+    "concurrently": "^8.0.1",
+    "ember-auto-import": "^2.6.3",
+    "ember-cli": "~4.12.2",
+    "ember-cli-dependency-checker": "^3.3.1",
+    "ember-cli-inject-live-reload": "^2.1.0",
+    "ember-cli-sri": "^2.1.1",
+    "ember-cli-terser": "^4.0.2",
     "ember-debug-handlers-polyfill": "^1.0.4",
-    "ember-disable-prototype-extensions": "^1.1.2",
-    "ember-export-application-global": "^2.0.0",
-    "ember-load-initializers": "^1.0.0",
-    "ember-maybe-import-regenerator": "^0.1.6",
+    "ember-load-initializers": "^2.1.2",
+    "ember-page-title": "^7.0.0",
+    "ember-qunit": "^6.2.0",
     "ember-qunit-assert-helpers": "^0.2.1",
-    "ember-resolver": "^4.0.0",
-    "ember-source": "~3.1.0",
-    "ember-source-channel-url": "^1.0.1",
-    "ember-try": "^0.2.23",
-    "eslint-plugin-ember": "^5.0.0",
-    "eslint-plugin-node": "^6.0.1",
-    "loader.js": "^4.2.3"
+    "ember-resolver": "^10.0.0",
+    "ember-source": "~4.12.0",
+    "ember-source-channel-url": "^3.0.0",
+    "ember-template-lint": "^5.7.2",
+    "ember-try": "^2.0.0",
+    "eslint": "^8.37.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-ember": "^11.5.0",
+    "eslint-plugin-n": "^15.7.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-qunit": "^7.3.4",
+    "loader.js": "^4.7.0",
+    "prettier": "^2.8.7",
+    "qunit": "^2.19.4",
+    "qunit-dom": "^2.0.0",
+    "stylelint": "^15.4.0",
+    "stylelint-config-standard": "^32.0.0",
+    "stylelint-prettier": "^3.0.0",
+    "webpack": "^5.78.0"
   },
   "directories": {
     "doc": "doc",
     "test": "tests"
   },
+  "engines": {
+    "node": "14.* || 16.* || >= 18"
+  },
+  "ember": {
+    "edition": "octane"
+  },
   "ember-addon": {
     "configPath": "tests/dummy/config"
   },
-  "engines": {
-    "node": "^4.5 || 6.* || >= 7.*"
+  "peerDependencies": {
+    "ember-source": "^4.0.0"
   },
   "homepage": "https://github.com/martndemus/ember-invoke-action#readme",
   "keywords": [
@@ -116,11 +139,19 @@
     "url": "git+https://github.com/martndemus/ember-invoke-action.git"
   },
   "scripts": {
-    "build": "ember build",
-    "lint:js": "eslint ./*.js addon addon-test-support app blueprints config lib server test-support tests",
+    "build": "ember build --environment=production",
+    "lint": "concurrently \"npm:lint:*(!fix)\" --names \"lint:\"",
+    "lint:css": "stylelint \"**/*.css\"",
+    "lint:css:fix": "concurrently \"npm:lint:css -- --fix\"",
+    "lint:fix": "concurrently \"npm:lint:*:fix\" --names \"fix:\"",
+    "lint:hbs": "ember-template-lint .",
+    "lint:hbs:fix": "ember-template-lint . --fix",
+    "lint:js": "eslint . --cache",
+    "lint:js:fix": "eslint . --fix",
     "start": "ember serve",
-    "test": "ember test",
-    "test:all": "ember try:each"
+    "test": "concurrently \"npm:lint\" \"npm:test:*\" --names \"lint,test:\"",
+    "test:ember": "ember test",
+    "test:ember-compatibility": "ember try:each"
   },
   "version": "1.5.1"
 }
